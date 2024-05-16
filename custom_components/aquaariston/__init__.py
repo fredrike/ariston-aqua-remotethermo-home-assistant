@@ -246,8 +246,8 @@ def setup(hass, config):
 
     gateways_txt = ", ".join(dev_gateways)
     names_txt = ", ".join(dev_names)
-    _LOGGER.info(f"All gateways: {gateways_txt}")
-    _LOGGER.info(f"All names: {names_txt}")
+    _LOGGER.debug(f"All gateways: {gateways_txt}")
+    _LOGGER.debug(f"All names: {names_txt}")
 
     def set_ariston_aqua_data(call):
         """Handle the service call to set the data."""

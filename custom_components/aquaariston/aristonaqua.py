@@ -582,7 +582,7 @@ class AquaAristonHandler:
 
         self._started = False
 
-        self._LOGGER.info("API initiated")
+        self._LOGGER.debug("API initiated")
 
         if self._boiler_type == self._TYPE_VELIS:
             # presumably it is Velis, which uses showers instead of temperatures
@@ -974,7 +974,7 @@ class AquaAristonHandler:
                             )
                             self._timer_set_delay.start()
             except KeyError:
-                self._LOGGER.info("%s check showers exception", self)
+                self._LOGGER.debug("%s check showers exception", self)
         return
 
     def _get_plant_id(self, resp):
@@ -1035,7 +1035,7 @@ class AquaAristonHandler:
                         f'Gateway "{self._default_gw}" is not in the list of allowed gateways: {gateways_txt}'
                     )
                 else:
-                    self._LOGGER.info(f"Allowed gateways: {gateways_txt}")
+                    self._LOGGER.debug(f"Allowed gateways: {gateways_txt}")
                 plant_id = self._default_gw
 
         return plant_id
@@ -1094,7 +1094,7 @@ class AquaAristonHandler:
                     self._fetch_max_temp()
                 with self._plant_id_lock:
                     self._login = True
-                    self._LOGGER.info("%s Plant ID is %s", self, self._plant_id)
+                    self._LOGGER.debug("%s Plant ID is %s", self, self._plant_id)
         return
 
     def _model_fetch(self):
@@ -1170,7 +1170,7 @@ class AquaAristonHandler:
                     continue
 
     def _set_sensors(self, request_type=""):
-        self._LOGGER.info("Setting sensors based on request %s", request_type)
+        self._LOGGER.debug("Setting sensors based on request %s", request_type)
 
         if request_type == self._REQUEST_GET_MAIN:
             if self.available and self._ariston_main_data != {}:
@@ -1786,7 +1786,7 @@ class AquaAristonHandler:
                 "%s %s Not properly logged in to get the data", self, request_type
             )
             raise Exception("Not logged in to fetch the data")
-        self._LOGGER.info("Data fetched")
+        self._LOGGER.debug("Data fetched")
         return True
 
     def _queue_get_data(self):
@@ -1946,13 +1946,13 @@ class AquaAristonHandler:
                 self._errors = 0
                 self._set_statuses()
             if was_offline:
-                self._LOGGER.info("No more errors")
+                self._LOGGER.debug("No more errors")
 
     def _control_availability_state(self, request_type=""):
         """Control component availability"""
         try:
             result_ok = self._get_http_data(request_type)
-            self._LOGGER.info(f"ariston action ok for {request_type}")
+            self._LOGGER.debug(f"ariston action ok for {request_type}")
         except Exception as ex:
             self._error_detected(request_type)
             self._LOGGER.warning(f"ariston action nok for {request_type}: {ex}")
@@ -1963,7 +1963,7 @@ class AquaAristonHandler:
 
     def _setting_http_data(self, set_data, request_type=""):
         """setting of data"""
-        self._LOGGER.info("setting http data")
+        self._LOGGER.debug("setting http data")
         try:
             if self._store_file:
                 if not os.path.isdir(self._store_folder):
@@ -2057,7 +2057,7 @@ class AquaAristonHandler:
             )
         self._set_time_end[request_type] = time.time()
         self._no_error_detected(request_type)
-        self._LOGGER.info("%s %s Data was presumably changed", self, request_type)
+        self._LOGGER.debug("%s %s Data was presumably changed", self, request_type)
 
     def _preparing_setting_http_data(self):
         """Preparing and setting http data"""
@@ -2615,7 +2615,7 @@ class AquaAristonHandler:
                         self._set_param[self._PARAM_MODE] = self._mode_to_val[
                             good_values[self._PARAM_MODE]
                         ]
-                        self._LOGGER.info(
+                        self._LOGGER.debug(
                             "%s New mode %s", self, good_values[self._PARAM_MODE]
                         )
                     except KeyError:
@@ -2631,7 +2631,7 @@ class AquaAristonHandler:
                         self._set_param[self._PARAM_ON] = self._STRING_TO_VALUE[
                             good_values[self._PARAM_ON]
                         ]
-                        self._LOGGER.info(
+                        self._LOGGER.debug(
                             "%s New mode %s", self, good_values[self._PARAM_ON]
                         )
                     except KeyError:
@@ -2647,7 +2647,7 @@ class AquaAristonHandler:
                         self._set_param[self._PARAM_ECO] = self._STRING_TO_VALUE[
                             good_values[self._PARAM_ECO]
                         ]
-                        self._LOGGER.info(
+                        self._LOGGER.debug(
                             "%s New mode %s", self, good_values[self._PARAM_ECO]
                         )
                     except KeyError:
@@ -2663,7 +2663,7 @@ class AquaAristonHandler:
                         self._set_param[self._PARAM_REQUIRED_SHOWERS] = good_values[
                             self._PARAM_REQUIRED_SHOWERS
                         ]
-                        self._LOGGER.info(
+                        self._LOGGER.debug(
                             "%s New mode %s",
                             self,
                             good_values[self._PARAM_REQUIRED_SHOWERS],
@@ -2683,7 +2683,7 @@ class AquaAristonHandler:
                         self._set_param[self._PARAM_REQUIRED_TEMPERATURE] = good_values[
                             self._PARAM_REQUIRED_TEMPERATURE
                         ]
-                        self._LOGGER.info(
+                        self._LOGGER.debug(
                             "%s New mode %s",
                             self,
                             good_values[self._PARAM_REQUIRED_TEMPERATURE],
@@ -2703,7 +2703,7 @@ class AquaAristonHandler:
                         self._set_param[self._PARAM_CLEANSE_TEMPERATURE] = good_values[
                             self._PARAM_CLEANSE_TEMPERATURE
                         ]
-                        self._LOGGER.info(
+                        self._LOGGER.debug(
                             "%s New mode %s",
                             self,
                             good_values[self._PARAM_CLEANSE_TEMPERATURE],
@@ -2766,7 +2766,7 @@ class AquaAristonHandler:
         self._timer_periodic_read = threading.Timer(1, self._queue_get_data)
         self._timer_periodic_read.start()
         self._started = True
-        self._LOGGER.info("Connection started")
+        self._LOGGER.debug("Connection started")
 
     def stop(self) -> None:
         """Stop communication with the server."""
@@ -2791,4 +2791,4 @@ class AquaAristonHandler:
         self._session.close()
         self._clear_data()
         self._set_statuses()
-        self._LOGGER.info("Connection stopped")
+        self._LOGGER.debug("Connection stopped")
