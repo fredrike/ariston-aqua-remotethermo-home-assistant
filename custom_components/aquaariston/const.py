@@ -52,7 +52,7 @@ CONF_GW = "gw"
 VALUE = "value"
 UNITS = "units"
 
-DOMAIN = "aquaariston_dersher"
+DOMAIN = "aquaariston"
 DATA_ARISTONAQUA = DOMAIN
 DEVICES = "aqua_devices"
 SERVICE_SET_DATA = "ariston_set_data"

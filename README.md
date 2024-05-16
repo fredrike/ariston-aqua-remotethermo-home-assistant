@@ -1,5 +1,4 @@
-# DROPPING SUPPORT OF THIS INTEGRATION
-This integration was created based on either temporary access to others boilers or providing me with required data. I do not have a boiler which supports this specific integration and it complicates troubleshooting and maintenance a lot (constantly asking to provide data and if it is not enough then ask again and again with descriptions of steps to be taken, and I cannot even test it myself and I must ask what to test and how). To me it feels like I have to constantly ask for help even thogh features and bug fixes are for someone else. It takes a lot of my time and I have no gain from it in any way (no competence build up, no profits, it is no longer interesting for me).
+This is a fork trying to keep the great work from https://github.com/chomupashchuk/ariston-aqua-remotethermo-home-assistant alive.
 
 # Aqua Ariston NET remotethermo integration
 Thin integration is Aqua Ariston NET.
@@ -75,14 +74,14 @@ aquaariston:
 Refer to `Multiple boilers under one account setup` section on https://github.com/chomupashchuk/ariston-remotethermo-home-assistant-v2 .
 
 ## Services
-`aquaariston.aqua_set_data` - Sets the requested data.
+`aquaariston.ariston_set_data` - Sets the requested data.
 
 ### Service attributes
-  - `entity_id` - mandatory entity of Ariston water heater. For the rest of attributes please see Developer Tools tab Services within Home Assistant and select `aquaariston.aqua_set_data`. You may also directly read services.yaml within the `aquaariston` folder. Note that changing `required_showers` changes `temperature_mode` to `showers` and changing `required_temperature` changes `temperature_mode` to temperature on models that use shower mode (temperature mode is being simulated for some models like Velis wifi).
+  - `entity_id` - mandatory entity of Ariston water heater. For the rest of attributes please see Developer Tools tab Services within Home Assistant and select `aquaariston.ariston_set_data`. You may also directly read [services.yaml](custom_components/aquaariston/services.yaml ). Note that changing `required_showers` changes `temperature_mode` to `showers` and changing `required_temperature` changes `temperature_mode` to temperature on models that use shower mode (temperature mode is being simulated for some models like Velis wifi).
   
 ### Service use example
 ```
-service: aquaariston.aqua_set_data
+service: aquaariston.ariston_set_data
 data:
     entity_id: 'water_heater.aqua_ariston'
     antilegionella_set_temperature: 75
