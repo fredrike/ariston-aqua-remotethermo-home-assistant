@@ -1,12 +1,12 @@
 {
   "domain": "aquaariston",
   "name": "AquaAriston",
+  "codeowners": ["@fredrike"],
+  "dependencies": [],
   "documentation": "https://github.com/fredrike/ariston-aqua-remotethermo-home-assistant",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/fredrike/ariston-aqua-remotethermo-home-assistant/issues",
   "requirements": [],
-  "dependencies": [],
-  "codeowners": ["@fredrike"],
-  "iot_class": "cloud_polling",
-  "integration_type": "hub",
   "version": "1.0.1"
 }

@@ -1,0 +1,51 @@
+{
+  "title": "Aqua Ariston",
+  "services": {
+    "ariston_set_data": {
+      "name": "Set Ariston Aqua settings",
+      "description": "Set Ariston Aqua Data",
+      "fields": {
+        "entity_id": {
+          "description": "Select device to be controlled",
+          "name": "Target device"
+        },
+        "mode": {
+          "description": "Mode, supported values depends on model.",
+          "name": "Mode"
+        },
+        "required_temperature": {
+          "description": "Target temperature in steps of '1'.",
+          "name": "Target temperature"
+        },
+        "required_showers": {
+          "description": "Target number of showers",
+          "name": "Target showers"
+        },
+        "antilegionella_set_temperature": {
+          "description": "Temperature during antilegionella cycle in steps of '1'.",
+          "name": "Antilegionella temperature"
+        },
+        "power": {
+          "description": "Power ON.",
+          "name": "Power"
+        },
+        "eco": {
+          "description": "Enable Eco mode",
+          "name": "Eco mode"
+        }
+      }
+    }
+  },
+  "selector": {
+    "mode": {
+      "options": {
+        "manual": "Manual",
+        "program": "Program",
+        "night": "Night",
+        "i-memory": "I-Memory",
+        "boost": "Boost",
+        "green": "Green"
+      }
+    }
+  }
+}
