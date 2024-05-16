@@ -1,6 +1,7 @@
 """Suppoort for Ariston Aqua binary sensors."""
 
 from homeassistant.components.binary_sensor import BinarySensorDeviceClass
+from homeassistant.components.binary_sensor import BinarySensorEntity
 from homeassistant.const import CONF_BINARY_SENSORS, CONF_NAME
 
 import logging
