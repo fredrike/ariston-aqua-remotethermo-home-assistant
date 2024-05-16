@@ -6,5 +6,7 @@
   "requirements": [],
   "dependencies": [],
   "codeowners": ["@fredrike"],
+  "iot_class": "cloud_polling",
+  "integration_type": "hub",
   "version": "1.0.1"
 }

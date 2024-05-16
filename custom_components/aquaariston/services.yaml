@@ -3,7 +3,11 @@ ariston_set_data:
     entity_id:
       required: true
       example: water_heater.aqua_ariston
-      domain: water_heater
+      selector:
+        device:
+          integration: "aquaariston"
+          entity:
+            domain: water_heater
     mode:
       example: manual
       selector:
