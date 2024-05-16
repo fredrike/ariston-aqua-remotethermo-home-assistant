@@ -2,14 +2,9 @@
 from datetime import timedelta
 
 from homeassistant.components.select import SelectEntity
-from homeassistant.const import CONF_SELECTOR, CONF_NAME
+from homeassistant.const import CONF_NAME, CONF_SELECTOR
 
-from .const import (
-    DATA_ARISTONAQUA,
-    DEVICES,
-    PARAM_MODE,
-    VALUE,
-)
+from .const import DATA_ARISTONAQUA, DEVICES, PARAM_MODE, VALUE
 
 SELECT_MODE = "Boiler Mode"
 

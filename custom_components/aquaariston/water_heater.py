@@ -2,23 +2,21 @@
 import logging
 from datetime import timedelta
 
-from homeassistant.components.water_heater import WaterHeaterEntity
-from homeassistant.components.water_heater import WaterHeaterEntityFeature
-from homeassistant.const import (
-    ATTR_TEMPERATURE,
-    CONF_NAME,
-    UnitOfTemperature,
+from homeassistant.components.water_heater import (
+    WaterHeaterEntity,
+    WaterHeaterEntityFeature,
 )
+from homeassistant.const import ATTR_TEMPERATURE, CONF_NAME, UnitOfTemperature
 
 from .const import (
     DATA_ARISTONAQUA,
     DEVICES,
-    VALUE,
-    PARAM_ON,
-    PARAM_REQUIRED_TEMPERATURE,
     PARAM_CURRENT_TEMPERATURE,
     PARAM_HEATING,
     PARAM_MODE,
+    PARAM_ON,
+    PARAM_REQUIRED_TEMPERATURE,
+    VALUE,
 )
 
 ACTION_IDLE = "idle"
@@ -86,7 +84,10 @@ class AristonAquaWaterHeater(WaterHeaterEntity):
     @property
     def supported_features(self):
         """Return the list of supported features."""
-        return WaterHeaterEntityFeature.TARGET_TEMPERATURE | WaterHeaterEntityFeature.OPERATION_MODE
+        return (
+            WaterHeaterEntityFeature.TARGET_TEMPERATURE
+            | WaterHeaterEntityFeature.OPERATION_MODE
+        )
 
     @property
     def current_temperature(self):
@@ -106,7 +107,9 @@ class AristonAquaWaterHeater(WaterHeaterEntity):
     def min_temp(self):
         """Return minimum temperature."""
         try:
-            minimum_temp = self._api.supported_sensors_set_values[PARAM_REQUIRED_TEMPERATURE]["min"]
+            minimum_temp = self._api.supported_sensors_set_values[
+                PARAM_REQUIRED_TEMPERATURE
+            ]["min"]
         except KeyError:
             return UNKNOWN_TEMP
         return minimum_temp
@@ -115,7 +118,9 @@ class AristonAquaWaterHeater(WaterHeaterEntity):
     def max_temp(self):
         """Return the maximum temperature."""
         try:
-            maximum_temp = self._api.supported_sensors_set_values[PARAM_REQUIRED_TEMPERATURE]["max"]
+            maximum_temp = self._api.supported_sensors_set_values[
+                PARAM_REQUIRED_TEMPERATURE
+            ]["max"]
         except KeyError:
             return UNKNOWN_TEMP
         return maximum_temp
@@ -133,7 +138,9 @@ class AristonAquaWaterHeater(WaterHeaterEntity):
     def target_temperature_step(self):
         """Return the supported step of target temperature."""
         try:
-            step = self._api.supported_sensors_set_values[PARAM_REQUIRED_TEMPERATURE]["step"]
+            step = self._api.supported_sensors_set_values[PARAM_REQUIRED_TEMPERATURE][
+                "step"
+            ]
         except KeyError:
             return 1.0
         return step
@@ -142,7 +149,9 @@ class AristonAquaWaterHeater(WaterHeaterEntity):
     def extra_state_attributes(self):
         """Return the supported step of target temperature."""
         try:
-            step = self._api.supported_sensors_set_values[PARAM_REQUIRED_TEMPERATURE]["step"]
+            step = self._api.supported_sensors_set_values[PARAM_REQUIRED_TEMPERATURE][
+                "step"
+            ]
         except KeyError:
             step = 1.0
         try:

@@ -1,24 +1,26 @@
 """Suppoort for Ariston Aqua binary sensors."""
 
-from homeassistant.components.binary_sensor import BinarySensorDeviceClass
-from homeassistant.components.binary_sensor import BinarySensorEntity
-from homeassistant.const import CONF_BINARY_SENSORS, CONF_NAME
-
 import logging
 from datetime import timedelta
+
+from homeassistant.components.binary_sensor import (
+    BinarySensorDeviceClass,
+    BinarySensorEntity,
+)
+from homeassistant.const import CONF_BINARY_SENSORS, CONF_NAME
 
 from .const import (
     DATA_ARISTONAQUA,
     DEVICES,
-    VALUE,
-    PARAM_ON,
-    PARAM_HEATING,
+    PARAM_CHANGING_DATA,
     PARAM_CLEANSE,
     PARAM_ECO,
-    PARAM_UPDATE,
+    PARAM_HEATING,
+    PARAM_ON,
     PARAM_ONLINE,
-    PARAM_CHANGING_DATA,
     PARAM_ONLINE_VERSION,
+    PARAM_UPDATE,
+    VALUE,
 )
 
 BINARY_SENSOR_ON = "Power"

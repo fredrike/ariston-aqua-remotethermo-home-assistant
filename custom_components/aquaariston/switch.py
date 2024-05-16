@@ -2,15 +2,9 @@
 from datetime import timedelta
 
 from homeassistant.components.switch import SwitchEntity
-from homeassistant.const import CONF_SWITCHES, CONF_NAME
+from homeassistant.const import CONF_NAME, CONF_SWITCHES
 
-from .const import (
-    DATA_ARISTONAQUA,
-    DEVICES,
-    VALUE,
-    PARAM_ON,
-    PARAM_ECO,
-)
+from .const import DATA_ARISTONAQUA, DEVICES, PARAM_ECO, PARAM_ON, VALUE
 
 SWITCH_POWER = "Power"
 SWITCH_ECO = "Eco Mode"

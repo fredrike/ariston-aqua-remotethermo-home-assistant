@@ -2,34 +2,31 @@
 import logging
 from datetime import timedelta
 
+from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.const import CONF_NAME, CONF_SENSORS
 from homeassistant.helpers.entity import Entity
-from homeassistant.components.sensor import (
-    SensorDeviceClass
-)
-
 
 from .const import (
     DATA_ARISTONAQUA,
     DEVICES,
-    VALUE,
-    UNITS,
-    PARAM_ERRORS,
-    PARAM_CURRENT_TEMPERATURE,
-    PARAM_REQUIRED_TEMPERATURE,
-    PARAM_MODE,
-    PARAM_SHOWERS,
-    PARAM_TIMER,
     PARAM_CLEANSE_TEMPERATURE,
-    PARAM_TIME_PROGRAM,
+    PARAM_CURRENT_TEMPERATURE,
     PARAM_ENERGY_USE_DAY,
-    PARAM_ENERGY_USE_WEEK,
     PARAM_ENERGY_USE_MONTH,
+    PARAM_ENERGY_USE_WEEK,
     PARAM_ENERGY_USE_YEAR,
+    PARAM_ERRORS,
+    PARAM_MODE,
     PARAM_REQUIRED_SHOWERS,
+    PARAM_REQUIRED_TEMPERATURE,
+    PARAM_SHOWERS,
     PARAM_TEMPERATURE_MODE,
+    PARAM_TIME_PROGRAM,
+    PARAM_TIMER,
+    UNITS,
     VAL_PROGRAM,
     VAL_SHOWERS,
+    VALUE,
 )
 
 SCAN_INTERVAL = timedelta(seconds=2)
@@ -58,17 +55,41 @@ _LOGGER = logging.getLogger(__name__)
 # Sensor types are defined like: Name, units, icon
 SENSORS = {
     PARAM_ERRORS: [SENSOR_ERRORS, None, "mdi:alert-outline"],
-    PARAM_CURRENT_TEMPERATURE: [SENSOR_CURRENT_TEMPERATURE, SensorDeviceClass.TEMPERATURE, "mdi:thermometer"],
-    PARAM_REQUIRED_TEMPERATURE: [SENSOR_REQUIRED_TEMPERATURE, SensorDeviceClass.TEMPERATURE, "mdi:thermometer"],
+    PARAM_CURRENT_TEMPERATURE: [
+        SENSOR_CURRENT_TEMPERATURE,
+        SensorDeviceClass.TEMPERATURE,
+        "mdi:thermometer",
+    ],
+    PARAM_REQUIRED_TEMPERATURE: [
+        SENSOR_REQUIRED_TEMPERATURE,
+        SensorDeviceClass.TEMPERATURE,
+        "mdi:thermometer",
+    ],
     PARAM_MODE: [SENSOR_MODE, None, "mdi:cursor-pointer"],
     PARAM_SHOWERS: [SENSOR_SHOWERS, None, "mdi:shower-head"],
     PARAM_TIMER: [SENSOR_TIMER, None, "mdi:timer"],
-    PARAM_CLEANSE_TEMPERATURE: [SENSOR_CLEANSE_TEMPERATURE, SensorDeviceClass.TEMPERATURE, "mdi:thermometer"],
+    PARAM_CLEANSE_TEMPERATURE: [
+        SENSOR_CLEANSE_TEMPERATURE,
+        SensorDeviceClass.TEMPERATURE,
+        "mdi:thermometer",
+    ],
     PARAM_TIME_PROGRAM: [SENSOR_TIME_PROGRAM, None, "mdi:calendar-month"],
     PARAM_ENERGY_USE_DAY: [SENSOR_ENERGY_USE_DAY, SensorDeviceClass.ENERGY, "mdi:cash"],
-    PARAM_ENERGY_USE_WEEK: [SENSOR_ENERGY_USE_WEEK, SensorDeviceClass.ENERGY, "mdi:cash"],
-    PARAM_ENERGY_USE_MONTH: [SENSOR_ENERGY_USE_MONTH, SensorDeviceClass.ENERGY, "mdi:cash"],
-    PARAM_ENERGY_USE_YEAR: [SENSOR_ENERGY_USE_YEAR, SensorDeviceClass.ENERGY, "mdi:cash"],
+    PARAM_ENERGY_USE_WEEK: [
+        SENSOR_ENERGY_USE_WEEK,
+        SensorDeviceClass.ENERGY,
+        "mdi:cash",
+    ],
+    PARAM_ENERGY_USE_MONTH: [
+        SENSOR_ENERGY_USE_MONTH,
+        SensorDeviceClass.ENERGY,
+        "mdi:cash",
+    ],
+    PARAM_ENERGY_USE_YEAR: [
+        SENSOR_ENERGY_USE_YEAR,
+        SensorDeviceClass.ENERGY,
+        "mdi:cash",
+    ],
     PARAM_REQUIRED_SHOWERS: [SENSOR_REQUIRED_SHOWERS, None, "mdi:shower-head"],
     PARAM_TEMPERATURE_MODE: [SENSOR_TEMPERATURE_MODE, None, "mdi:thermometer"],
 }
@@ -118,12 +139,12 @@ class AristonAquaSensor(Entity):
     def state(self):
         """Return the state of the sensor."""
         return self._state
-        
+
     @property
     def device_class(self):
         """Return device class."""
         return self._device_class
-        
+
     @property
     def extra_state_attributes(self):
         """Return the state attributes."""
@@ -167,8 +188,10 @@ class AristonAquaSensor(Entity):
         """Return True if entity is available."""
         if self._sensor_type == PARAM_TEMPERATURE_MODE:
             return self._api.available
-        return self._api.available \
+        return (
+            self._api.available
             and not self._api.sensor_values[self._sensor_type][VALUE] is None
+        )
 
     def update(self):
         """Get the latest data and updates the state."""

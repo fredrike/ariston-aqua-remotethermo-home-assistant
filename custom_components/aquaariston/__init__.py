@@ -4,54 +4,53 @@ import logging
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from homeassistant.components.binary_sensor import DOMAIN as BINARY_SENSOR
+from homeassistant.components.select import DOMAIN as SELECT
 from homeassistant.components.sensor import DOMAIN as SENSOR
 from homeassistant.components.switch import DOMAIN as SWITCH
-from homeassistant.components.select import DOMAIN as SELECT
 from homeassistant.components.water_heater import DOMAIN as WATER_HEATER
 from homeassistant.const import (
     ATTR_ENTITY_ID,
     CONF_BINARY_SENSORS,
     CONF_NAME,
     CONF_PASSWORD,
+    CONF_SELECTOR,
     CONF_SENSORS,
     CONF_SWITCHES,
-    CONF_SELECTOR,
     CONF_USERNAME,
 )
 from homeassistant.helpers import discovery
 
 from .aristonaqua import AquaAristonHandler
-
 from .binary_sensor import BINARY_SENSORS
 from .const import (
-    DOMAIN,
-    DATA_ARISTONAQUA,
-    DEVICES,
-    SERVICE_SET_DATA,
-    WATER_HEATERS,
+    CONF_GW,
+    CONF_LOG,
     CONF_MAX_RETRIES,
+    CONF_PATH,
+    CONF_POLLING,
     CONF_STORE_CONFIG_FILES,
     CONF_TYPE,
-    CONF_POLLING,
-    CONF_LOG,
-    CONF_PATH,
-    CONF_GW,
-    VALUE,
-    PARAM_MODE,
-    PARAM_ECO,
-    PARAM_ON,
-    PARAM_CLEANSE_TEMPERATURE,
-    PARAM_REQUIRED_TEMPERATURE,
-    PARAM_REQUIRED_SHOWERS,
+    DATA_ARISTONAQUA,
+    DEVICES,
+    DOMAIN,
     PARAM_CHANGING_DATA,
+    PARAM_CLEANSE_TEMPERATURE,
+    PARAM_ECO,
+    PARAM_MODE,
+    PARAM_ON,
     PARAM_ONLINE,
+    PARAM_REQUIRED_SHOWERS,
+    PARAM_REQUIRED_TEMPERATURE,
+    SERVICE_SET_DATA,
     TYPE_LYDOS,
     TYPE_LYDOS_HYBRID,
     TYPE_VELIS,
+    VALUE,
+    WATER_HEATERS,
 )
+from .select import SELECTS
 from .sensor import SENSORS
 from .switch import SWITCHES
-from .select import SELECTS
 
 DEFAULT_NAME = "Aqua Ariston"
 DEFAULT_MAX_RETRIES = 5
@@ -63,7 +62,7 @@ ARISTONAQUA_SCHEMA = vol.Schema(
     {
         vol.Required(CONF_USERNAME): cv.string,
         vol.Required(CONF_PASSWORD): cv.string,
-        vol.Required(CONF_TYPE):  vol.In([TYPE_LYDOS, TYPE_LYDOS_HYBRID, TYPE_VELIS]),
+        vol.Required(CONF_TYPE): vol.In([TYPE_LYDOS, TYPE_LYDOS_HYBRID, TYPE_VELIS]),
         vol.Optional(CONF_GW, default=""): cv.string,
         vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
         vol.Optional(CONF_BINARY_SENSORS): vol.All(
@@ -118,7 +117,7 @@ class AristonAquaChecker:
         polling,
         logging,
         path,
-        gw
+        gw,
     ):
         """Initialize."""
 
@@ -151,7 +150,7 @@ class AristonAquaChecker:
             polling=polling,
             logging_level=logging,
             store_folder=path,
-            gw=gw
+            gw=gw,
         )
 
 
@@ -270,7 +269,7 @@ def setup(hass, config):
             raise Exception("Invalid entity_id device for Ariston Aqua")
 
         for api in api_list:
-            if api.name.replace(' ', '_').lower() == device_id.lower():
+            if api.name.replace(" ", "_").lower() == device_id.lower():
                 # water_heater entity is found
                 parameter_list = {}
 
