@@ -2,6 +2,7 @@
 import logging
 from datetime import timedelta
 
+from homeassistant.components.water_heater import WaterHeaterEntity
 from homeassistant.components.water_heater import WaterHeaterEntityFeature
 from homeassistant.const import (
     ATTR_TEMPERATURE,
