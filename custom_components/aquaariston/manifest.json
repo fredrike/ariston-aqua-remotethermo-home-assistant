@@ -1,10 +1,10 @@
 {
-  "domain": "aquaariston_dersher",
-  "name": "AquaAriston-DerSher",
-  "documentation": "https://github.com/dersher/ariston-aqua-remotethermo-home-assistant",
-  "issue_tracker": "https://github.com/dersher/ariston-aqua-remotethermo-home-assistant/issues",
+  "domain": "aquaariston",
+  "name": "AquaAriston",
+  "documentation": "https://github.com/fredrike/ariston-aqua-remotethermo-home-assistant",
+  "issue_tracker": "https://github.com/fredrike/ariston-aqua-remotethermo-home-assistant/issues",
   "requirements": [],
   "dependencies": [],
-  "codeowners": ["@dersher"],
+  "codeowners": ["@fredrike"],
   "version": "1.0.1"
 }
